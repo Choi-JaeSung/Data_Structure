@@ -1,4 +1,4 @@
-from Node import Node
+from Node import *
 
 class SimplyLinkedList:
     def __init__(self):
@@ -28,7 +28,7 @@ class SimplyLinkedList:
             
     def getAt(self, index):
         if self.size == 0 or self.size <= index:
-            return print("Out of Range!")
+            return None
             
         else:
             node = self.head
@@ -37,3 +37,42 @@ class SimplyLinkedList:
                 node = node.getNext()
             
             return node
+        
+    def search(self, var):
+        node = self.head
+        
+        for i in range(0, self.size):
+            if node.getVar() == var:
+                return node
+            else:
+                node = node.getNext()
+                
+        return None
+    
+    def deleteAt(self, index):
+        if self.size == 0 or self.size <= index:
+            return None
+        else:
+            if index == 0:
+                if self.size == 1:
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.head = self.head.getNext()
+            else :
+                current_node = self.head
+                previous_node = self.head
+                
+                for i in range(0, index + 1):
+                    if i == index:
+                        if current_node.getNext() == None:
+                            previous_node.setNext(None)
+                            self.tail = previous_node
+                        else:
+                            previous_node.setNext(current_node.getNext())
+                    else:    
+                        previous_node = current_node
+                        current_node = current_node.getNext()
+            
+            self.size -= 1
+                        
